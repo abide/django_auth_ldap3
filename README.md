@@ -217,3 +217,11 @@ Default: `None`
 *Optional.* String to suffix the username before binding. This is used for `user@domain` principals.
 
 You must set `AUTH_LDAP_BIND_TEMPLATE` to `None` when using this option.
+
+#### `ALLOW_GROUP_MEMBEROF_GROUP`
+
+Default: `False`
+
+*Optional.* Allow users that are members of a group that is a direct sub group of AUTH_LDAP_LOGIN_GROUP
+
+You must set `ALLOW_GROUP_MEMBEROF_GROUP` to `True` when using this option.

@@ -19,6 +19,7 @@ class LDAPSettings(object):
         'USERNAME_PREFIX': None,
         'USERNAME_SUFFIX': None,
         'URI': 'ldap://localhost',
+        'ALLOW_GROUP_MEMBEROF_GROUP': False,
     }
 
     def __init__(self):

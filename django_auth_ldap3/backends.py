@@ -46,7 +46,9 @@ class LDAPBackend(object):
         # TODO: disconnect?
         pass
 
-    def authenticate(self, username=None, password=None, group_query=settings.LOGIN_GROUP, allow_group_memberof_group=False):
+    def authenticate(self, username=None, password=None,
+                     group_query=settings.LOGIN_GROUP,
+                     allow_group_memberof_group=settings.ALLOW_GROUP_MEMBEROF_GROUP):
         """
         Required for Django auth. Authenticate the uesr against the LDAP
         backend and populate the local User model if this is the first
@@ -72,7 +74,8 @@ class LDAPBackend(object):
         # Check if this user is part of the admin group.
         admin = False
         if settings.ADMIN_GROUP:
-            admin = self.check_group_membership(ldap_user, group_query, allow_group_memberof_group)
+            # never allow group memberof group check on admin accounts
+            admin = self.check_group_membership(ldap_user, group_query, False)
 
         # Get or create the User object in Django's auth, populating it with
         # fields from the LDAPUser. Note we set the password to a random hash
